@@ -171,7 +171,7 @@ export default function N() {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            MUI
+            
           </Typography>
           <Search style={{width:'50%', alignItems:'center',marginLeft:'18%'}} sx={{marginLeft:'100px'}}>
             <SearchIconWrapper>
@@ -198,11 +198,14 @@ export default function N() {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-           
+            <Link to="/" style={{textTransform:'none' , margin:'10px', textDecoration:"none"}} >
+
+<Button variant="outlined" style={{borderColor:"#FFFFFF", color: '#FFFFFF',textDecoration:"none", textTransform:'none'}}>Home</Button>
+</Link>
             
-            <Link to="./login">
+            <Link to="./login" style={{textTransform:'none', margin:'10px', textDecoration:'none'}} >
             
-             <Button onClick={()=>{setLogin(true)}} variant="outlined" style={{borderColor:"#FFFFFF", color: '#FFFFFF'}}>Login</Button>
+             <Button onClick={()=>{setLogin(true)}} variant="outlined" style={{borderColor:"#FFFFFF", color: '#FFFFFF',textTransform:'none'}}>Login</Button>
             </Link>
 
            

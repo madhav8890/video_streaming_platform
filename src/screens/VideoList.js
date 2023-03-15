@@ -20,6 +20,7 @@ import React, { useEffect, useState } from 'react'
 import {Link} from "react-router-dom"
 
 
+
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -31,39 +32,40 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function VideoList() {
+export default function VideoList(props) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const [data ,setData] = useState([])
+  // const [data ,setData] = useState([])
 
-  useEffect(()=>{
-      axios
-      .get("https://cipherschool-backend-7j25.onrender.com/api/v1/allvideos")
-      .then((res) =>{ setData(res.data); console.log(res.data)})
-  },[])
+  // useEffect(()=>{
+  //     axios
+  //     .get("https://cipherschool-backend-7j25.onrender.com/api/v1/allvideos")
+  //     .then((res) =>{ setData(res.data); console.log(res.data)})
+  // },[])
 
   return (
 
-    <>
-     {
-        data.map((item)=>(
+    <div >
+     
+        
           
-            <Link to={`/VideoPlayer/${item._id}`}  underline="none" style={{display:'flex' , flexDirection:'row', flexWrap:'wrap'}}>
+            <Link to={`/VideoPlayer/${props.video._id}`}   style={{ textDecoration:'none'}}>
    
          
-            <Card sx={{ maxWidth: 345, margin:'10px'}} style={{width:'23%'}}>
+            <Card sx={{ maxWidth: 345, margin:'10px'}} style={{width:'330px', height:'320px', margin:"10px"}}>
         
             <CardMedia
               component="img"
               height="194"
-              image={item.thombnail}
+              
+              image={props.video.thombnail}
               alt="Paella dish"
             />
-      
+          <h4 style={{marginLeft:'20px', marginTop:'5px', marginBottom:'0px'}}>{props.video.title}</h4>
                   <CardHeader
               avatar={
                 <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -75,16 +77,15 @@ export default function VideoList() {
                   <MoreVertIcon />
                 </IconButton>
               }
-              title={item.title}
+              title={props.video.userName}
               subheader="September 14, 2016"
             />
       
           </Card>
        </Link>
-        ))
-     }
+      
    
-    </>
+    </div>
 
   );
 }

@@ -8,24 +8,25 @@ import VideoBottomNevigation from "./VideoBottomNevigation"
 import SideDrower from "./SideDrower"
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useParams } from "react-router-dom";
 
 
 export default function VideoPlayer() {
 
   const [data ,setData] = useState([])
+  const {id} = useParams()
 
   useEffect(()=>{
       axios
-      .get("https://cipherschool-backend-7j25.onrender.com/api/v1/allvideos")
-      .then((res) =>{ setData(res.data); console.log(res.data)})
-  },[])
+      .get(`https://cipherschool-backend-7j25.onrender.com/api/v1/getVideoById/${id}`)
+      .then((res) =>{ setData(res.data); console.log("wjhdebchscvdhsv",res.data)})
+  },[id])
 
   
     return (
       <div>
         <SideDrower/>
-        {
-        data.map((item)=>(
+      
         <div style={{marginLeft:'5rem'}} >
           <div
             style={{
@@ -55,16 +56,19 @@ export default function VideoPlayer() {
                 }}
               >
                 <div style={{ width: "100%" }}>
-                  {/* VideoPlayer */}
+                
+        
+
                   <Player style={{borderRadius:'10px' , backgroundColor:'none'}}
-                    poster={item.thombnail}
-                    src={item.video}
+                    poster={data.thombnail}
+                    src={data.video}
                   >
                     <BigPlayButton position="center" />
                     <ControlBar autoHide={false} className="my-class" >
                     <ClosedCaptionButton order={7} />
                     </ControlBar>
                   </Player>
+                 
                 </div>
               </div>
               <div
@@ -78,7 +82,7 @@ export default function VideoPlayer() {
                   scrollbarColor:"red"
                 }}
               >
-               <VideoBottomNevigation/> 
+               <VideoBottomNevigation data={data}/> 
                 {/* nevigation bottom */}
               </div>
               <div
@@ -108,9 +112,7 @@ export default function VideoPlayer() {
             </div>
           </div>
         </div>
-        ))
-
-      }
+     
       </div>
     );
   }
